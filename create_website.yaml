@@ -1,0 +1,22 @@
+---
+- name: Create Static Web Site
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install Apache
+      yum:
+        name: httpd
+        state: present
+
+    - name: Download Website Template
+      get_url:
+        url: "https://www.free-css.com/assets/files/free-css-templates/download/page288/frica.zip"
+        dest: /var/www/html/
+        
+    - name: Install Unzipe
+      yum:
+        name: unzip
+        state: present
+    - name: Unzip frica.zip
+      command: unzip /var/www/html/frica.zip -d /var/www/html/
