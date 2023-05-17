@@ -1,5 +1,5 @@
 ---
-- name: Create Static Web Site
+- name: Create Static Website
   hosts: all
   become: true
 
@@ -9,14 +9,15 @@
         name: httpd
         state: present
 
-    - name: Download Website Template
-      get_url:
-        url: "https://www.free-css.com/assets/files/free-css-templates/download/page288/frica.zip"
-        dest: /var/www/html/
-        
-    - name: Install Unzipe
+    - name: Install Unzip
       yum:
         name: unzip
         state: present
+
+    - name: Download frica.zip
+      get_url:
+        url: "https://www.free-css.com/assets/files/free-css-templates/download/page288/frica.zip"
+        dest: "/var/www/html/frica.zip"
+
     - name: Unzip frica.zip
-      command: unzip /var/www/html/frica.zip -d /var/www/html/
+      command: unzip -o /var/www/html/frica.zip -d /var/www/html/
